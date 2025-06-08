@@ -1,0 +1,70 @@
+[tool.poetry]
+name = "finance-tracker"
+version = "0.1.0"
+description = "Personal Finance Tracking Application"
+authors = ["Your Name <your.email@example.com>"]
+license = "MIT"
+readme = "README.md"
+keywords = ["finance", "budget", "tracking", "fastapi"]
+packages = [{include = "app"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.104.0"
+uvicorn = {extras = ["standard"], version = "^0.24.0"}
+sqlalchemy = "^2.0.0"
+alembic = "^1.12.0"
+pydantic = "^2.4.0"
+pydantic-settings = "^2.0.0"
+python-jose = {extras = ["cryptography"], version = "^3.3.0"}
+python-multipart = "^0.0.6"
+bcrypt = "^4.0.0"
+python-dotenv = "^1.0.0"
+aiosqlite = "^0.19.0"
+asyncpg = "^0.29.0"
+pandas = "^2.1.0"
+httpx = "^0.25.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.0"
+pytest-asyncio = "^0.21.0"
+pytest-cov = "^4.1.0"
+black = "^23.0.0"
+isort = "^5.12.0"
+flake8 = "^6.0.0"
+mypy = "^1.5.0"
+pre-commit = "^3.4.0"
+factory-boy = "^3.3.0"
+
+[[tool.poetry.source]]
+name = "pypi"
+url = "https://pypi.org/simple/"
+priority = "primary"
+
+[[tool.poetry.source]]
+name = "pypi-files"
+url = "https://files.pythonhosted.org/simple/"
+priority = "supplemental"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-v --cov=app --cov-report=html"
+asyncio_mode = "auto"
+
+[tool.black]
+line-length = 88
+target-version = ["py311"]
+
+[tool.isort]
+profile = "black"
+line_length = 88
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
