@@ -1,71 +1,50 @@
 # Finance Tracker
 
-A personal finance tracking application built with FastAPI and SQLAlchemy.
+A personal finance API built with FastAPI, async SQLAlchemy, and Alembic.
 
-## Features
+**Status: early work in progress.** This is a learning project I started to practise building a Python backend. It does not run yet in its current state, and most features are planned rather than built.
 
-- Track income and expenses
-- Categorize transactions
-- Budget management
-- Account management (checking, savings, credit cards)
-- Financial reports and analytics
+## What exists
 
-## Quick Start
+- Database models for users, accounts, account types, categories, category groups, and transactions
+- Pydantic schemas for those models
+- Auth endpoints for register, login, and the current user (`app/api/auth.py`)
+- Account endpoints to create and list accounts (`app/api/v1/accounts.py`)
+- A pytest setup with three smoke tests for the root, health, and API root endpoints
+- Alembic configuration for migrations
 
-1. Install Poetry (if not already installed):
-   ```bash
-   curl -sSL https://install.python-poetry.org | python3 -
-   ```
+## Known issues
 
-2. Install dependencies:
-   ```bash
-   poetry install
-   ```
+- The router imports `auth` from `app.api.v1`, but the module lives at `app/api/auth.py`, so the app fails on import.
+- The account endpoints are not registered with the router.
+- There is a leftover duplicate of the project in the nested `finance-tracker/` folder.
 
-3. Run the development server:
-   ```bash
-   poetry run dev
-   ```
+## Planned
 
-4. Open your browser to `http://localhost:8000/docs` to see the API documentation.
+- Recording income and expenses
+- Budgets
+- Reports
 
-## Development
+## Running it
 
-### Running Tests
+Install dependencies with [Poetry](https://python-poetry.org/):
+
 ```bash
-poetry run test
+poetry install
 ```
 
-### Code Formatting
+Once the import issue above is fixed, start the server with:
+
 ```bash
-poetry run format
+poetry run uvicorn app.main:app --reload
 ```
 
-### Code Linting
+Then open `http://localhost:8000/docs`.
+
+Run the tests with:
+
 ```bash
-poetry run lint
-```
-
-### Database Migrations
-```bash
-poetry run alembic revision --autogenerate -m "Description"
-poetry run alembic upgrade head
-```
-
-## Project Structure
-
-```
-finance-tracker/
-├── app/                    # Main application code
-│   ├── api/               # API endpoints
-│   ├── core/              # Core functionality
-│   ├── models/            # Database models
-│   ├── schemas/           # Pydantic schemas
-│   ├── services/          # Business logic
-│   └── database/          # Database configuration
-├── tests/                 # Test suite
-├── docs/                  # Documentation
-└── scripts/               # Utility scripts
+poetry run pytest
 ```
 
 ## License
