@@ -50,3 +50,12 @@ poetry run pytest
 ## License
 
 MIT License
+
+## Dependency updates
+
+[Renovate](renovate.json) is configured for supported manifests, including the
+existing nested project. Install its [GitHub App](https://github.com/apps/renovate)
+for this repository to activate it. Routine updates are grouped weekly, with a
+three-day release-age delay; vulnerability PRs bypass both restrictions. No PRs
+auto-merge. Major upgrades require Dependency Dashboard approval. Keep dependency
+alerts, tests and security scans enabled. This does not fix the known application issues.
